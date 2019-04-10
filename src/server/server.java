@@ -9,5 +9,6 @@ import java.util.ArrayList;
 public class server {
 
     static final int PORT = 8888;
+    private ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
 
 }
