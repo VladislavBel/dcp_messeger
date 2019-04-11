@@ -1,4 +1,8 @@
 package client;
 
 public class main {
+
+    public static void main (String[] args){
+        ClientWindow clientWindow = new ClientWindow();
+    }
 }

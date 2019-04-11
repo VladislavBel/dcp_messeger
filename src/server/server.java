@@ -11,39 +11,43 @@ public class server {
     static final int PORT = 8888;
     private ArrayList<ClientHandler> clients = new ArrayList<ClientHandler>();
 
-    public server(){
+    public server() {
         Socket clientSocket = null;
         ServerSocket serverSocket = null;
-        try  {
+        try {
             serverSocket = new ServerSocket(PORT);
-            System.out.println("Server start");
-            while(true){
+            System.out.println("Сервер запущен!");
+            while (true) {
                 clientSocket = serverSocket.accept();
                 ClientHandler client = new ClientHandler(clientSocket, this);
                 clients.add(client);
                 new Thread(client).start();
             }
         }
-        catch (IOException ex){
+        catch (IOException ex) {
             ex.printStackTrace();
         }
         finally {
             try {
                 clientSocket.close();
-                System.out.println("Server stopped");
+                System.out.println("Сервер остановлен");
                 serverSocket.close();
             }
-            catch (IOException ex){
+            catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
     }
-    public void sendMessageToAllClients(String msg){
-        for (ClientHandler o : clients){
+
+    public void sendMessageToAllClients(String msg) {
+        for (ClientHandler o : clients) {
             o.sendMsg(msg);
         }
+
     }
-    public void removeClient(ClientHandler client){
-        client.remove(client);
+
+    public void removeClient(ClientHandler client) {
+        clients.remove(client);
     }
+
 }
